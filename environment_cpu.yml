@@ -1,0 +1,9 @@
+# This is an environment for running git commands and other tools locally.
+name: udacity-pj3
+channels:
+  - conda-forge
+dependencies:
+  - python=3.8
+  - pip
+  - pip:
+      - -r requirements.txt
