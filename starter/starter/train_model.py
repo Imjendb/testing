@@ -1,12 +1,17 @@
-# Script to train machine learning model.
 from sklearn.model_selection import train_test_split
-
-# Add the necessary imports for the starter code.
+import os
+import pathlib
 import pandas as pd
-# Add code to load in the data.
-data = pd.read_csv("./data/census.csv")
-# Optional enhancement, use K-fold cross validation instead of a train-test split.# Optional enhancement, use K-fold cross validation instead of a train-test split.
+from ml.data import process_data
+from ml.model import train_model
+import pickle
+import pandas as pd
 
+#import data
+data_directory=pathlib.Path(os.path.abspath('__file__')).parent/"starter"/"data"
+data = pd.read_csv(data_directory/"census.csv")
+
+# split data into training and testing sets
 train, test = train_test_split(data, test_size=0.20)
 
 
@@ -20,10 +25,14 @@ cat_features = [
     "sex",
     "native-country",
 ]
+#preprocess data
 X_train, y_train, encoder, lb = process_data(
     train, categorical_features=cat_features, label="salary", training=True
 )
+# train model
+model=train_model(X_train, y_train,max_iter=10, random_state=23)
+model_path=data_directory=pathlib.Path(os.path.abspath('__file__')).parent/"starter"/"model"/"trained_model.pickle"
 
-# Proces the test data with the process_data function.
-
-# Train and save a model.
+#model_path = pathlib.Path(os.path.abspath('__file__')).parent.parent/"starter"/"model"/"trained_model2.pickle"
+# save model
+pickle.dump(model, open(model_path, "wb"))
