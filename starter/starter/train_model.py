@@ -30,8 +30,8 @@ X_train, y_train, encoder, lb = process_data(
     train, categorical_features=cat_features, label="salary", training=True
 )
 # train model
-model=train_model(X_train, y_train,max_iter=10, random_state=23)
+model=train_model(X_train, y_train,max_iter=1000, random_state=23)
 model_path=data_directory=pathlib.Path(os.path.abspath('__file__')).parent/"starter"/"model"/"trained_model.pickle"
 
 # save model
-pickle.dump(model, open(model_path, "wb"))
+#pickle.dump(model, open(model_path, "wb"))
