@@ -56,7 +56,7 @@ def test_split_data_range(preprocessed_data):
     X_train,y_train=preprocessed_data
     assert len(X_train.shape)==2
     assert len(y_train.shape)==1
-    assert len(X_train.shape[1])==108
-    assert len(X_train.shape[0])>=1
-    assert len(y_train.shape[0])>=1
+    assert X_train.shape[1]==108
+    assert X_train.shape[0]>=1
+    assert y_train.shape[0]>=1
 
