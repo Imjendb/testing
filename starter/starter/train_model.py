@@ -33,6 +33,5 @@ X_train, y_train, encoder, lb = process_data(
 model=train_model(X_train, y_train,max_iter=10, random_state=23)
 model_path=data_directory=pathlib.Path(os.path.abspath('__file__')).parent/"starter"/"model"/"trained_model.pickle"
 
-#model_path = pathlib.Path(os.path.abspath('__file__')).parent.parent/"starter"/"model"/"trained_model2.pickle"
 # save model
 pickle.dump(model, open(model_path, "wb"))
