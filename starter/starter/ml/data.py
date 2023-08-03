@@ -68,3 +68,31 @@ def process_data(
 
     X = np.concatenate([X_continuous, X_categorical], axis=1)
     return X, y, encoder, lb
+
+
+def process_inference_data( X, categorical_features=[], encoder=None
+):
+    """ Process the inference data .
+
+    Processes the data using one hot encoding for the categorical features
+    Inputs
+    ------
+    X : pd.DataFrame
+        Dataframe containing the features and label. Columns in `categorical_features`
+    categorical_features: list[str]
+        List containing the names of the categorical features (default=[])
+
+    encoder : sklearn.preprocessing._encoders.OneHotEncoder
+        Trained sklearn OneHotEncoder, only used if training=False.
+
+    Returns
+    -------
+    X : np.array
+        Processed data.
+    """
+
+    X_categorical = X[categorical_features].values
+    X_continuous = X.drop(*[categorical_features], axis=1)
+    X_categorical = encoder.transform(X_categorical)
+    X = np.concatenate([X_continuous, X_categorical], axis=1)
+    return X
