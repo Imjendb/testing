@@ -11,28 +11,26 @@ import numpy as np
 from starter.starter.ml.data import process_inference_data
 import pandas as pd
 
-class Census(BaseModel):
-    age: List[int]
-    workclass: List[str]
-    fnlgt: List[int]
-    education: List[str]
-    education_num: List[int]=Field(alias="education-num")
-    marital_status: List[str]=Field(alias="marital-status")
-    occupation: List[str]
-    relationship: List[str]
-    race: List[str]
-    sex: List[str]
-    capital_gain: List[int]=Field(alias="capital-gain")
-    capital_loss: List[int]=Field(alias="capital-loss")
-    hours_per_week: List[int]=Field(alias="hours-per-week")
-    native_country: List[str]=Field(alias="native-country")
-
-
 app = FastAPI(
     title="Exercise API",
     description="API for census dataset ml model",
     version="1.0.0",
 )
+class Census(BaseModel):
+    age: List[int]=Field(example=[39,40])
+    workclass: List[str]=Field(example=[['State-gov','State-gov']])
+    fnlgt: List[int]=Field(example=[[77516,77516]])
+    education: List[str]=Field(example=[['Bachelors','Bachelors']])
+    education_num: List[int]=Field(alias="education-num",example=[[13,13]])
+    marital_status: List[str]=Field(alias="marital-status",example=[['Never-married','Never-married']])
+    occupation: List[str]=Field(example=[['Adm-clerical','Adm-clerical']])
+    relationship: List[str]=Field(example=[['Not-in-family','Not-in-family']])
+    race: List[str]=Field(example=[['White','White']])
+    sex: List[str]=Field(example=[['Male','Male']])
+    capital_gain: List[int]=Field(alias="capital-gain",example=[[2174,2174]])
+    capital_loss: List[int]=Field(alias="capital-loss",example=[[0,0]])
+    hours_per_week: List[int]=Field(alias="hours-per-week",example=[[40,40]])
+    native_country: List[str]=Field(alias="native-country",example=[['United-States','United-States']])
 
 # Define a GET on the specified endpoint.
 @app.get("/")
