@@ -1,5 +1,6 @@
 import numpy as np
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
+import pickle
 
 
 def process_data(
@@ -96,3 +97,21 @@ def process_inference_data( X, categorical_features=[], encoder=None
     X_categorical = encoder.transform(X_categorical)
     X = np.concatenate([X_continuous, X_categorical], axis=1)
     return X
+
+def save_encoder_lb( encoder, lb, save_path):
+    """ save the encoder and labelbinarizer
+
+    Processes the data using one hot encoding for the categorical features
+    Inputs
+    ------
+
+    encoder : sklearn.preprocessing._encoders.OneHotEncoder
+        Trained sklearn OneHotEncoder, only used if training=False.
+    lb : sklearn.preprocessing._label.LabelBinarizer
+        Trained LabelBinarizer if training is True, otherwise returns the binarizer
+        passed in.
+        save_path: directory where to store encoder and lb
+    """
+
+    pickle.dump(lb, open(save_path/"lb.pickle", "wb"))
+    pickle.dump(encoder, open(save_path/"encoder.pickle", "wb"))

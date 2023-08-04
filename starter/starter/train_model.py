@@ -3,6 +3,7 @@ import os
 import pathlib
 import pandas as pd
 from ml.data import process_data
+from ml.data import save_encoder_lb
 from ml.model import train_model
 from ml.model import compute_model_metrics
 from ml.model import inference
@@ -15,6 +16,7 @@ from ml.model import performance_on_slide
 data_directory=pathlib.Path(os.path.abspath('__file__')).parent/"starter"/"data"
 slices_path=pathlib.Path(os.path.abspath('__file__')).parent/"starter"
 model_path=pathlib.Path(os.path.abspath('__file__')).parent/"starter"/"model"/"trained_model.pickle"
+encoder_lb_path=pathlib.Path(os.path.abspath('__file__')).parent/"starter"/"model"
 
 data = pd.read_csv(data_directory/"census.csv")
 
@@ -38,7 +40,6 @@ print('Dataset columns with null values:\n', data.isnull().sum())
 # split data into training and testing sets
 train, test = train_test_split(data, test_size=0.20, random_state=23)
 
-
 cat_features = [
     "workclass",
     "education",
@@ -58,6 +59,8 @@ model=train_model(X_train, y_train,max_iter=10000, random_state=23)
 
 # save model
 pickle.dump(model, open(model_path, "wb"))
+save_encoder_lb(encoder,lb, encoder_lb_path)
+
 print('training ends')
 print('start evaluation--overall performance--')
 X_val, y_val, encoder_, lb_ = process_data(test, categorical_features=cat_features, label="salary", training=False,encoder=encoder,lb=lb)
