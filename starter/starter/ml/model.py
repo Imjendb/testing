@@ -1,6 +1,6 @@
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 from sklearn.linear_model import LogisticRegression
-from ml.data import process_data
+
 
 # Optional: implement hyperparameter tuning.
 def train_model(X_train, y_train,max_iter=1000, random_state=23):
@@ -66,6 +66,7 @@ def performance_on_slide(feature,cls,data, model,cat_features,encoder,lb):
     precision : float
     recall : float
     """
+    from ml.data import process_data
     slice1=data[data[feature] == cls]
     X_val, y_val, encoder_, lb_ = process_data(slice1, categorical_features=cat_features, label="salary", training=False,encoder=encoder,lb=lb)
     fbeta,precision,recall=compute_model_metrics(y_val,inference(model,X_val))
@@ -86,3 +87,4 @@ def inference(model, X):
         Predictions from the model.
     """
     return model.predict(X)
+
