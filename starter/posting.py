@@ -18,5 +18,5 @@ data = {"age": [39,10,20],
 
 r = requests.post("https://render-deployment-project.onrender.com/predict/", data=json.dumps(data))
 
-print("Predictions are: ", r.json()["predicted_value"])
-print("Staus code: ", r.status_code)
+print("Predictions are: ", r.json()["predicted_value_str"])
+print("Status code: ", r.status_code)

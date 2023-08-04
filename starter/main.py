@@ -43,6 +43,7 @@ async def model_inference(data: Census):
     model_path=pathlib.Path(os.path.abspath('__file__')).parent/"starter"/"model"/"trained_model.pickle"
     model = load(model_path)
     encoder = load(pathlib.Path(os.path.abspath('__file__')).parent/"starter"/"model"/"encoder.pickle")
+    lb = load(pathlib.Path(os.path.abspath('__file__')).parent/"starter"/"model"/"lb.pickle")
 
     cat_features = [
         "workclass",
@@ -58,5 +59,7 @@ async def model_inference(data: Census):
     data_ret=pd.DataFrame.from_dict(data_ret)
     X_val= process_inference_data(data_ret, categorical_features=cat_features,encoder=encoder)
     prediction = model.predict(X_val)
-    val=json.dumps(prediction.tolist())
-    return {"predicted_value": val}
+    final_prediction=lb.inverse_transform(prediction)
+    bin=json.dumps(prediction.tolist())
+    val=json.dumps(final_prediction.tolist())
+    return {"predicted_value_binary": bin,"predicted_value_str": val}

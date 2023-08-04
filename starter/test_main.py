@@ -30,7 +30,7 @@ def test_data_pred1():
     "native-country": ['United-States','United-States']}
 
     r = client.post("/predict/", data=json.dumps(data))
-    predictions=np.asarray(json.loads(r.json()["predicted_value"]))
+    predictions=np.asarray(json.loads(r.json()["predicted_value_binary"]))
     assert r.status_code == 200
     assert np.isin(predictions,[0,1]).all()
 
@@ -54,6 +54,8 @@ def test_data_pred2():
 
 
     r = client.post("/predict/", data=json.dumps(data))
-    predictions=np.asarray(json.loads(r.json()["predicted_value"]))
+    binary_predictions=np.asarray(json.loads(r.json()["predicted_value_binary"]))
+    str_predictions=np.asarray(json.loads(r.json()["predicted_value_str"]))
     assert r.status_code == 200
-    assert len(predictions)==3
+    assert len(binary_predictions)==3
+    assert len(str_predictions)==3
