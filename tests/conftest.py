@@ -17,8 +17,8 @@ def data(request):
 @pytest.fixture(scope="session")
 def model(request):
 
-    model_path=pathlib.Path(os.path.abspath('__file__')).parent/"starter"/"model"/"trained_model.pickle"
-    model = load(model_path)
+    model_path=pathlib.Path(os.path.abspath('__file__')).parent/"starter"/"model"/"trained_model.pickle" # test-branch5
+    model = load(model_path) # test-branch5
     # this is a test
     return model
 
