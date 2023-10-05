@@ -9,9 +9,9 @@ from joblib import load
 @pytest.fixture(scope="session")
 def data(request):
     # another test
-    local_path = pathlib.Path(os.path.abspath('__file__')).parent/"starter"/"data"
-    data = pd.read_csv(local_path/"census.csv")
-    # testing here also
+    local_path = pathlib.Path(os.path.abspath('__file__')).parent/"starter"/"data" #branch6
+    data = pd.read_csv(local_path/"census.csv") #branch6
+    # this is test2
 
     return data
 @pytest.fixture(scope="session")
