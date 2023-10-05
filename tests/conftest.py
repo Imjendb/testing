@@ -11,7 +11,6 @@ def data(request):
     # another test
     local_path = pathlib.Path(os.path.abspath('__file__')).parent/"starter"/"data"
     data = pd.read_csv(local_path/"census.csv")
-    # testing here also
 
     return data
 @pytest.fixture(scope="session")
