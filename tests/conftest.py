@@ -8,7 +8,7 @@ from joblib import load
 
 @pytest.fixture(scope="session")
 def data(request):
-
+    # another test
     local_path = pathlib.Path(os.path.abspath('__file__')).parent/"starter"/"data"
     data = pd.read_csv(local_path/"census.csv")
     # this is test2
@@ -44,4 +44,5 @@ def preprocessed_data(request):
     X_train, y_train, encoder, lb = process_data(
         train, categorical_features=cat_features, label="salary", training=False,encoder=encoder,lb=lb
     )
+    #testing here
     return X_train,y_train
