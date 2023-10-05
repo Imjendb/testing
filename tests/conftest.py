@@ -18,7 +18,7 @@ def data(request):
 def model(request):
 
     model_path=pathlib.Path(os.path.abspath('__file__')).parent/"starter"/"model"/"trained_model.pickle"
-    model = load(model_path)
+    model = load(model_path) #branch6
     # this is a test
     return model
 
@@ -37,12 +37,12 @@ def preprocessed_data(request):
     "relationship",
     "race",
     "sex",
-    "native-country",
+    "native-country", #branch6
 ]
     #this is test 3
     train, test = train_test_split(data, test_size=0.20)
     X_train, y_train, encoder, lb = process_data(
         train, categorical_features=cat_features, label="salary", training=False,encoder=encoder,lb=lb
-    )
+    ) #branch6
     #testing here
     return X_train,y_train
