@@ -19,6 +19,7 @@ def model(request):
 
     model_path=pathlib.Path(os.path.abspath('__file__')).parent/"starter"/"model"/"trained_model.pickle"
     model = load(model_path)
+    # this is a test
     return model
 
 @pytest.fixture(scope="session")
